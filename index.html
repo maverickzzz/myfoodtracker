@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html ng-app="myShoppingList">
+	<head>
+		<title>Food Tracker</title>
+		<meta charset="utf-8">
+	    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+	    <meta name="description" content="">
+	    <meta name="author" content="">
+
+		<script src="js/angular.min.js"></script>
+		<script src="js/angular-sanitize.min.js"></script>
+		<link rel="stylesheet" href="css/bootstrap.min.css">
+		<script src="js/jquery-3.1.1.slim.min.js"></script>
+		<script src="js/tether.min.js"></script>
+		<script src="js/bootstrap.min.js"></script>
+
+		<link rel="stylesheet" type="text/css" href="css/style.css" />
+	</head>
+	<body>
+		<div class="container">
+			<h1 class="title">What I Ate Today</h1>
+			<table class="table month-selector">
+				<tr>
+					<td><span class="month-selector-arrow">&#x2770;&#x2770;</span></td>
+					<td><span class="span-month-name">August 2017</span></td>
+					<td><span class="month-selector-arrow">&#x2771;&#x2771;</span></td>
+				</tr>
+			</table>
+			<table class="table">
+				<thead>
+					<tr>
+						<th>M</th>
+						<th>T</th>
+						<th>W</th>
+						<th>T</th>
+						<th>F</th>
+						<th>S</th>
+						<th>S</th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr>
+						<td></td>
+						<td><a href="#"><div class="day-box"><span class="day">1</span><span class="bullet bull-red">&bull;</span><span class="bullet bull-yellow">&bull;</span><span class="bullet bull-green">&bull;</span></div></a></td>
+						<td><a href="#"><div class="day-box"><span class="day">2</span><span class="bullet bull-red">&bull;</span><span class="bullet bull-yellow">&bull;</span><span class="bullet bull-green">&bull;</span></div></a></td>
+						<td><a href="#"><div class="day-box"><span class="day">3</span><span class="bullet bull-red">&bull;</span><span class="bullet bull-yellow">&bull;</span><span class="bullet bull-green">&bull;</span></div></a></td>
+						<td><a href="#"><div class="day-box"><span class="day">4</span><span class="bullet bull-red">&bull;</span><span class="bullet bull-yellow">&bull;</span><span class="bullet bull-green">&bull;</span></div></a></td>
+						<td><a href="#"><div class="day-box"><span class="day">5</span><span class="bullet bull-red">&bull;</span><span class="bullet bull-yellow">&bull;</span><span class="bullet bull-green">&bull;</span></div></a></td>
+						<td><a href="#"><div class="day-box"><span class="day">6</span><span class="bullet bull-red">&bull;</span><span class="bullet bull-yellow">&bull;</span><span class="bullet bull-green">&bull;</span></div></a></td>
+					</tr>
+					<tr>
+						<td><a href="#"><div class="day-box"><span class="day">7</span><span class="bullet bull-red">&bull;</span><span class="bullet bull-yellow">&bull;</span><span class="bullet bull-green">&bull;</span></div></a></td>
+						<td><a href="#"><div class="day-box"><span class="day">8</span><span class="bullet bull-red">&bull;</span><span class="bullet bull-yellow">&bull;</span><span class="bullet bull-green">&bull;</span></div></a></td>
+						<td><a href="#"><div class="day-box"><span class="day">9</span><span class="bullet bull-red">&bull;</span><span class="bullet bull-yellow">&bull;</span><span class="bullet bull-green">&bull;</span></div></a></td>
+						<td><a href="#"><div class="day-box"><span class="day">10</span><span class="bullet bull-red">&bull;</span><span class="bullet bull-yellow">&bull;</span><span class="bullet bull-green">&bull;</span></div></a></td>
+						<td><a href="#"><div class="day-box"><span class="day">11</span><span class="bullet bull-red">&bull;</span><span class="bullet bull-yellow">&bull;</span><span class="bullet bull-green">&bull;</span></div></a></td>
+						<td><a href="#"><div class="day-box"><span class="day">12</span><span class="bullet bull-red">&bull;</span><span class="bullet bull-yellow">&bull;</span><span class="bullet bull-green">&bull;</span></div></a></td>
+						<td><a href="#"><div class="day-box"><span class="day">13</span><span class="bullet bull-red">&bull;</span><span class="bullet bull-yellow">&bull;</span><span class="bullet bull-green">&bull;</span></div></a></td>
+					</tr>
+					<tr>
+						<td><a href="#"><div class="day-box"><span class="day">14</span><span class="bullet bull-red">&bull;</span><span class="bullet bull-yellow">&bull;</span><span class="bullet bull-green">&bull;</span></div></a></td>
+						<td><a href="#"><div class="day-box"><span class="day">15</span><span class="bullet bull-red">&bull;</span><span class="bullet bull-yellow">&bull;</span><span class="bullet bull-green">&bull;</span></div></a></td>
+						<td><a href="#"><div class="day-box"><span class="day">16</span><span class="bullet bull-red">&bull;</span><span class="bullet bull-yellow">&bull;</span><span class="bullet bull-green">&bull;</span></div></a></td>
+						<td><a href="#"><div class="day-box"><span class="day">17</span><span class="bullet bull-red">&bull;</span><span class="bullet bull-yellow">&bull;</span><span class="bullet bull-green">&bull;</span></div></a></td>
+						<td><a href="#"><div class="day-box"><span class="day">18</span><span class="bullet bull-red">&bull;</span><span class="bullet bull-yellow">&bull;</span><span class="bullet bull-green">&bull;</span></div></a></td>
+						<td><a href="#"><div class="day-box"><span class="day">19</span><span class="bullet bull-red">&bull;</span><span class="bullet bull-yellow">&bull;</span><span class="bullet bull-green">&bull;</span></div></a></td>
+						<td><a href="#"><div class="day-box"><span class="day">20</span><span class="bullet bull-red">&bull;</span><span class="bullet bull-yellow">&bull;</span><span class="bullet bull-green">&bull;</span></div></a></td>
+					</tr>
+					<tr>
+						<td><a href="#"><div class="day-box"><span class="day">21</span><span class="bullet bull-red">&bull;</span><span class="bullet bull-yellow">&bull;</span><span class="bullet bull-green">&bull;</span></div></a></td>
+						<td><a href="#"><div class="day-box"><span class="day">22</span><span class="bullet bull-red">&bull;</span><span class="bullet bull-yellow">&bull;</span><span class="bullet bull-green">&bull;</span></div></a></td>
+						<td><a href="#"><div class="day-box"><span class="day">23</span><span class="bullet bull-red">&bull;</span><span class="bullet bull-yellow">&bull;</span><span class="bullet bull-green">&bull;</span></div></a></td>
+						<td><a href="#"><div class="day-box"><span class="day">24</span><span class="bullet bull-red">&bull;</span><span class="bullet bull-yellow">&bull;</span><span class="bullet bull-green">&bull;</span></div></a></td>
+						<td><a href="#"><div class="day-box"><span class="day">25</span><span class="bullet bull-red">&bull;</span><span class="bullet bull-yellow">&bull;</span><span class="bullet bull-green">&bull;</span></div></a></td>
+						<td><a href="#"><div class="day-box"><span class="day">26</span><span class="bullet bull-red">&bull;</span><span class="bullet bull-yellow">&bull;</span><span class="bullet bull-green">&bull;</span></div></a></td>
+						<td><a href="#"><div class="day-box"><span class="day">27</span><span class="bullet bull-red">&bull;</span><span class="bullet bull-yellow">&bull;</span><span class="bullet bull-green">&bull;</span></div></a></td>
+					</tr>
+					<tr>
+						<td><a href="#"><div class="day-box"><span class="day">28</span><span class="bullet bull-red">&bull;</span><span class="bullet bull-yellow">&bull;</span><span class="bullet bull-green">&bull;</span></div></a></td>
+						<td><a href="#"><div class="day-box"><span class="day">29</span><span class="bullet bull-red">&bull;</span><span class="bullet bull-yellow">&bull;</span><span class="bullet bull-green">&bull;</span></div></a></td>
+						<td><a href="#"><div class="day-box"><span class="day">30</span><span class="bullet bull-red">&bull;</span><span class="bullet bull-yellow">&bull;</span><span class="bullet bull-green">&bull;</span></div></a></td>
+						<td><a href="#"><div class="day-box"><span class="day">31</span><span class="bullet bull-red">&bull;</span><span class="bullet bull-yellow">&bull;</span><span class="bullet bull-green">&bull;</span></div></a></td>
+						<td></td>
+						<td></td>
+						<td></td>
+					</tr>
+				</tbody>
+			</table>
+	    </div><!-- /.container -->
+	</body>
+</html>
