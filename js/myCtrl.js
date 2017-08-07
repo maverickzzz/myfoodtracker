@@ -87,6 +87,18 @@ app.controller("myCtrl", function($scope) {
     $scope.currentYear = 2017;
 
     $scope.generateCalendar = function(month, year) {
+        firstDay
+        firstDate
+        lastDay
+        lastDate
+
+        $scope.rows = [];
+        while (firstDate <= lastDate) {
+            for (intCounter = 0 ; intCounter < 7 ; intCounter++) {
+                
+            }
+            firstDate++;
+        }
 
     }
 
