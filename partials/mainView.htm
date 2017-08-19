@@ -11,7 +11,7 @@
 				<tbody>
 					<tr ng-repeat="row in rows">
 						<td ng-repeat="column in row.columns">
-							<a ng-if="column.day" href="#">
+							<a ng-if="column.day" href="#!detail/{{column.day}}">
 								<div class="day-box">
 									<span class="day">{{column.day}}</span>
 									<span class="bullet" ng-class="column.clsMorning">&bull;</span><span class="bullet" ng-class="column.clsAfternoon">&bull;</span><span class="bullet" ng-class="column.clsEvening">&bull;</span>

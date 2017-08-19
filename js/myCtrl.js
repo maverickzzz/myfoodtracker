@@ -1,6 +1,56 @@
 'use strict';
 
-app.controller("myCtrl", function($scope) {
+app.service("myService", function() {
+    var date = new Date(),
+        currentMonth = date.getMonth() + 1,
+        currentYear = date.getFullYear(),
+        months = [
+            {"monthNo" : 1, "monthName" : "January"},
+            {"monthNo" : 2, "monthName" : "February"},
+            {"monthNo" : 3, "monthName" : "March"},
+            {"monthNo" : 4, "monthName" : "April"},
+            {"monthNo" : 5, "monthName" : "May"},
+            {"monthNo" : 6, "monthName" : "June"},
+            {"monthNo" : 7, "monthName" : "July"},
+            {"monthNo" : 8, "monthName" : "August"},
+            {"monthNo" : 9, "monthName" : "September"},
+            {"monthNo" : 10, "monthName" : "October"},
+            {"monthNo" : 11, "monthName" : "November"},
+            {"monthNo" : 12, "monthName" : "December"},
+        ];
+
+    this.getMonth = function() {
+        return currentMonth;
+    }
+
+    this.getMonthName = function() {
+        return months[currentMonth - 1].monthName;
+    }
+
+    this.getYear = function() {
+        return currentYear;
+    }
+
+    this.nextMonth = function() {
+        if (currentMonth == 12) {
+            currentMonth = 1;
+            currentYear += 1;
+        } else {
+            currentMonth += 1;
+        }
+    }
+
+    this.prevMonth = function() {
+        if (currentMonth == 1) {
+            currentMonth = 12;
+            currentYear -= 1;
+        } else {
+            currentMonth -= 1;
+        }
+    }
+});
+
+app.controller("myCtrlMain", function($scope, $http, myService) {
     // $scope.rows = [
     //     {
     //         "columns" : [
@@ -59,24 +109,24 @@ app.controller("myCtrl", function($scope) {
     //     },
     // ];
 
-    $scope.months = [
-        {"monthNo" : 1, "monthName" : "January"},
-        {"monthNo" : 2, "monthName" : "February"},
-        {"monthNo" : 3, "monthName" : "March"},
-        {"monthNo" : 4, "monthName" : "April"},
-        {"monthNo" : 5, "monthName" : "May"},
-        {"monthNo" : 6, "monthName" : "June"},
-        {"monthNo" : 7, "monthName" : "July"},
-        {"monthNo" : 8, "monthName" : "August"},
-        {"monthNo" : 9, "monthName" : "September"},
-        {"monthNo" : 10, "monthName" : "October"},
-        {"monthNo" : 11, "monthName" : "November"},
-        {"monthNo" : 12, "monthName" : "December"},
-    ];
+    // $scope.months = [
+    //     {"monthNo" : 1, "monthName" : "January"},
+    //     {"monthNo" : 2, "monthName" : "February"},
+    //     {"monthNo" : 3, "monthName" : "March"},
+    //     {"monthNo" : 4, "monthName" : "April"},
+    //     {"monthNo" : 5, "monthName" : "May"},
+    //     {"monthNo" : 6, "monthName" : "June"},
+    //     {"monthNo" : 7, "monthName" : "July"},
+    //     {"monthNo" : 8, "monthName" : "August"},
+    //     {"monthNo" : 9, "monthName" : "September"},
+    //     {"monthNo" : 10, "monthName" : "October"},
+    //     {"monthNo" : 11, "monthName" : "November"},
+    //     {"monthNo" : 12, "monthName" : "December"},
+    // ];
 
-    $scope.getMonthName = function(month) {
-        return $scope.months[month - 1].monthName;
-    }
+    // $scope.getMonthName = function(month) {
+    //     return $scope.months[month - 1].monthName;
+    // }
 
     $scope.generateCalendar = function(month, year) {
         var dateBegin = new Date();
@@ -91,7 +141,7 @@ app.controller("myCtrl", function($scope) {
         var columns = [];
         var bolFound = false;
         var dateCounter = 1;
-        var dayCounter = 0;
+        var dayCounter = 0; 
 
         /* START GENERATE FIRST WEEK */
         if (firstDay == 0) {
@@ -101,12 +151,10 @@ app.controller("myCtrl", function($scope) {
             columns.push({"day" : "1", "clsMorning" : "", "clsAfternoon" : "", "clsEvening" : ""});
         } else {
             for (dayCounter = 1; dayCounter <= 6; dayCounter ++) {
-                if (dayCounter < firstDay) {
-                    if (!bolFound) {
+                if (!bolFound) {
+                    if (dayCounter < firstDay) {
                         columns.push({"day" : "", "clsMorning" : "", "clsAfternoon" : "", "clsEvening" : ""});
-                    }
-                } else {
-                    if (!bolFound) {
+                    } else {
                         columns.push({"day" : "1", "clsMorning" : "", "clsAfternoon" : "", "clsEvening" : ""});
                         bolFound = true;
                     }
@@ -148,34 +196,144 @@ app.controller("myCtrl", function($scope) {
 
         /* END GENERATE REST OF MONTH */
 
+        var dataCollection = [];
+
+        $http({
+            method: 'POST',
+            url: 'core/index.php/Foodlist/getList',
+            params: {
+                'periodmonth': month,
+                'periodyear' : year
+            }
+        }).then(function(obj) {
+            dataCollection = obj.data;
+
+            // console.log(dataCollection);
+
+            for (weekCounter = 0; weekCounter < $scope.rows.length; weekCounter++) {
+                for (dayCounter = 0; dayCounter < $scope.rows[weekCounter].columns.length; dayCounter++) {
+                    var dataCounter = 0;
+                    for (dataCounter = 0; dataCounter < dataCollection.length; dataCounter++) {
+                        if ($scope.rows[weekCounter].columns[dayCounter].day == dataCollection[dataCounter].day) {
+                            $scope.rows[weekCounter].columns[dayCounter].clsMorning = dataCollection[dataCounter].clsMorning;
+                            $scope.rows[weekCounter].columns[dayCounter].clsAfternoon = dataCollection[dataCounter].clsAfternoon;
+                            $scope.rows[weekCounter].columns[dayCounter].clsEvening = dataCollection[dataCounter].clsEvening;
+                            break;                 
+                        }
+                    }
+                }
+            }
+        });
     }
 
     $scope.prevMonth = function() {
-        if ($scope.currentMonth == 1) {
-            $scope.currentMonth = 12;
-            $scope.currentYear -= 1;
-        } else {
-            $scope.currentMonth -= 1;
-        }
-        $scope.currentMonthName = $scope.getMonthName($scope.currentMonth);
-        $scope.generateCalendar($scope.currentMonth, $scope.currentYear);
+        myService.prevMonth();
+        $scope.currentMonthName = myService.getMonthName();
+        $scope.currentYear = myService.getYear();
+        $scope.generateCalendar(myService.getMonth(), myService.getYear());
     }
 
     $scope.nextMonth = function() {
-        if ($scope.currentMonth == 12) {
-            $scope.currentMonth = 1;
-            $scope.currentYear += 1;
-        } else {
-            $scope.currentMonth += 1;
+        myService.nextMonth();
+        $scope.currentMonthName = myService.getMonthName();
+        $scope.currentYear = myService.getYear();
+        $scope.generateCalendar(myService.getMonth(), myService.getYear());
+    }
+    
+    // var date = new Date();
+    // $scope.currentMonth = date.getMonth() + 1;
+    // $scope.currentYear = date.getFullYear();
+
+    // $scope.currentMonthName = $scope.getMonthName($scope.currentMonth);
+    // $scope.generateCalendar($scope.currentMonth, $scope.currentYear);
+
+    $scope.currentMonthName = myService.getMonthName();
+    $scope.currentYear = myService.getYear();
+    $scope.generateCalendar(myService.getMonth(), myService.getYear());
+
+    // console.log(myService.getMonthName());
+    // console.log($scope.currentMonthName());
+});
+
+app.controller("myCtrlDetail", function($scope, $http, $routeParams, myService, $location) {
+    var dataCollection = [];
+
+    $http({
+        method: 'POST',
+        url: 'core/index.php/Foodlist/getDetail',
+        params: {
+            'periodday'  : $routeParams.day,
+            'periodmonth': myService.getMonth(),
+            'periodyear' : myService.getYear()
         }
-        $scope.currentMonthName = $scope.getMonthName($scope.currentMonth);
-        $scope.generateCalendar($scope.currentMonth, $scope.currentYear);
+    }).then(function(obj) {
+        dataCollection = obj.data;
+
+        $scope.historydate = dataCollection[0].historydate;
+        $scope.det_morning = (dataCollection[0].det_morning == '' ? '' : JSON.parse(dataCollection[0].det_morning));
+        $scope.det_afternoon = (dataCollection[0].det_afternoon == '' ? '' : JSON.parse(dataCollection[0].det_afternoon));
+        $scope.det_evening = (dataCollection[0].det_evening == '' ? '' : JSON.parse(dataCollection[0].det_evening));
+        $scope.uihong_severity = dataCollection[0].uihong_severity;
+    });
+
+    $scope.addFood = function(){
+        if ($scope.food) {
+            if ($scope.category == 'morning') {
+                if ($scope.det_morning.length <= 0) {
+                    $scope.det_morning = [];
+                }
+                if ($scope.det_morning.indexOf($scope.food) < 0) {
+                    $scope.det_morning.push($scope.food.trim());    
+                }                
+            }
+            if ($scope.category == 'afternoon') {
+                if ($scope.det_afternoon.length <= 0) {
+                    $scope.det_afternoon = [];
+                }
+                if ($scope.det_afternoon.indexOf($scope.food) < 0) {
+                    $scope.det_afternoon.push($scope.food.trim());    
+                }                
+            }
+            if ($scope.category == 'evening') {
+                if ($scope.det_evening.length <= 0) {
+                    $scope.det_evening = [];
+                }
+                if ($scope.det_evening.indexOf($scope.food) < 0) {
+                    $scope.det_evening.push($scope.food.trim());    
+                }                
+            }
+            $scope.food = "";
+        }
     }
 
-    var date = new Date();
-    $scope.currentMonth = date.getMonth() + 1;
-    $scope.currentMonthName = $scope.getMonthName($scope.currentMonth);
-    $scope.currentYear = 2017;
-    $scope.generateCalendar($scope.currentMonth, $scope.currentYear);
+    $scope.saveFood = function(){
+        $http({
+            method: 'POST',
+            url: 'core/index.php/Foodlist/getDetail',
+            params: {
+                'submit'     : true,
+                'morning'  : ($scope.det_morning.length > 0 ? angular.toJson($scope.det_morning) : ''),
+                'afternoon': ($scope.det_afternoon.length > 0 ? angular.toJson($scope.det_afternoon) : ''),
+                'evening' : ($scope.det_evening.length > 0 ? angular.toJson($scope.det_evening) : ''),
+                'historydate' : $scope.historydate,
+                'uihong_severity' : $scope.uihong_severity
+            }
+        }).then(function(obj) {
+            $location.path("/");
+        });
+    }
 
+    $scope.deleteFood = function(id, category) {
+        if (category == 'morning') {
+            $scope.det_morning.splice(id, 1);
+        } else if (category == 'afternoon') {
+            $scope.det_afternoon.splice(id, 1);
+        } else if (category == 'evening') {
+            $scope.det_evening.splice(id, 1);
+        }
+    }
+
+    $scope.cancelFood = function(){
+        $location.path("/");
+    }
 });

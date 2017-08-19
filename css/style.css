@@ -10,3 +10,6 @@ h1 {text-align: center; margin: 1rem auto;}
 .bull-morning {color: #db3236;}
 .bull-afternoon {color: #f4c20d;}
 .bull-evening {color: #3cba54;}
+.bg-morning {background-color: #db3236; border-color: #db3236;}
+.bg-afternoon {background-color: #f4c20d; border-color: #f4c20d;}
+.bg-evening {background-color: #3cba54; border-color: #3cba54;}
