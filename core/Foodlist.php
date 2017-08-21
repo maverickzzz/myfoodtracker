@@ -19,6 +19,8 @@ class Foodlist {
 			$newrow['clsMorning'] = ''; if ($row['det_morning'] != '' && $row['det_morning'] != NULL) $newrow['clsMorning'] = 'bull-morning';
 			$newrow['clsAfternoon'] = ''; if ($row['det_afternoon'] != '' && $row['det_afternoon'] != NULL) $newrow['clsAfternoon'] = 'bull-afternoon';
 			$newrow['clsEvening'] = ''; if ($row['det_evening'] != '' && $row['det_evening'] != NULL) $newrow['clsEvening'] = 'bull-evening';
+			$newrow['clsUihongSeverity'] = 0; if ($row['uihong_severity'] != '' && $row['uihong_severity'] != NULL) $newrow['clsUihongSeverity'] = 'bull-uihong-severity-' . $row['uihong_severity'];
+			$newrow['clsGotPoop'] = 0; if ($row['got_poop'] == 1) $newrow['clsGotPoop'] = 'bull-got-poop';
 			array_push($list, $newrow);
 		}
 

@@ -14,7 +14,15 @@
 							<a ng-if="column.day" href="#!detail/{{column.day}}">
 								<div class="day-box">
 									<span class="day">{{column.day}}</span>
-									<span class="bullet" ng-class="column.clsMorning">&bull;</span><span class="bullet" ng-class="column.clsAfternoon">&bull;</span><span class="bullet" ng-class="column.clsEvening">&bull;</span>
+									<!-- <span class="bullet" ng-class="column.clsMorning">&bull;</span><span class="bullet" ng-class="column.clsAfternoon">&bull;</span><span class="bullet" ng-class="column.clsEvening">&bull;</span><br/>
+									<span class="bullet bull-uihong-severity-2">&bull;</span><span class="bullet bull-uihong-severity-1">&bull;</span><span class="bullet bull-uihong-severity-0">&bull;</span><br/>
+									<span class="bullet bull-got-poop">&bull;</span> -->
+									<div class="row-bullet">
+										<i class="bullet" ng-class="column.clsMorning">&bull;</i><i class="bullet" ng-class="column.clsAfternoon">&bull;</i><i class="bullet" ng-class="column.clsEvening">&bull;</i>
+									</div>
+									<div class="row-bullet">
+										<i class="bullet" ng-class="column.clsUihongSeverity">&bull;</i><i class="bullet" ng-class="column.clsGotPoop">&bull;</i>
+									</div>
 								</div>
 							</a>
 						</td>

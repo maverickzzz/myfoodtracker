@@ -218,6 +218,8 @@ app.controller("myCtrlMain", function($scope, $http, myService) {
                             $scope.rows[weekCounter].columns[dayCounter].clsMorning = dataCollection[dataCounter].clsMorning;
                             $scope.rows[weekCounter].columns[dayCounter].clsAfternoon = dataCollection[dataCounter].clsAfternoon;
                             $scope.rows[weekCounter].columns[dayCounter].clsEvening = dataCollection[dataCounter].clsEvening;
+                            $scope.rows[weekCounter].columns[dayCounter].clsUihongSeverity = dataCollection[dataCounter].clsUihongSeverity;
+                            $scope.rows[weekCounter].columns[dayCounter].clsGotPoop = dataCollection[dataCounter].clsGotPoop;
                             break;                 
                         }
                     }
@@ -257,6 +259,21 @@ app.controller("myCtrlMain", function($scope, $http, myService) {
 
 app.controller("myCtrlDetail", function($scope, $http, $routeParams, myService, $location) {
     var dataCollection = [];
+
+    // $scope.category = [{"value" : "morning", "label" : "Morning"}, {"value" : "afternoon", "label" : "Afternoon"}, { "value" : "evening", "label" : "Evening"}];
+    // console.log($scope.category);
+
+    // var date = new Date();
+    // var hour = date.getHours();
+
+    // $scope.category = 'morning';
+    // if (hour < 12) {
+    //     $scope.category = 'morning';
+    // } else if (hour < 4) {
+    //     $scope.category = 'afternoon';
+    // } else {
+    //     $scope.category = 'evening';
+    // }
 
     $http({
         method: 'POST',
