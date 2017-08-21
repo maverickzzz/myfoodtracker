@@ -35,21 +35,22 @@ class Foodlist {
 			$data_evening = $_REQUEST['evening'];
 			$history_date = date('Y-m-d', strtotime($_REQUEST['historydate']));
 			$uihong_severity = intval($_REQUEST['uihong_severity']);
+			$got_poop = intval($_REQUEST['got_poop']);
 
 			$query = "select * from track_date where history_date = ?";
 			$stmt = $dbh->prepare($query);
 			$stmt->execute(array($history_date));
 
 			if ($stmt->rowCount() > 0) {
-				$query = "update track_date set det_morning = ?, det_afternoon = ?, det_evening = ?, uihong_severity = ? where history_date = ?";
+				$query = "update track_date set det_morning = ?, det_afternoon = ?, det_evening = ?, uihong_severity = ?, got_poop = ? where history_date = ?";
 				$stmt = $dbh->prepare($query);
 				var_dump($stmt);
-				$stmt->execute(array($data_morning, $data_afternoon, $data_evening, $uihong_severity, $history_date));
+				$stmt->execute(array($data_morning, $data_afternoon, $data_evening, $uihong_severity, $got_poop, $history_date));
 				var_dump($stmt);
 			} else {
-				$query = "insert into track_date values(?, ?, ?, ?, ?)";
+				$query = "insert into track_date values(?, ?, ?, ?, ?, ?)";
 				$stmt = $dbh->prepare($query);
-				$stmt->execute(array($history_date, $data_morning, $data_afternoon, $data_evening, $uihong_severity));
+				$stmt->execute(array($history_date, $data_morning, $data_afternoon, $data_evening, $uihong_severity, $got_poop));
 			}
 		
 		} else {
@@ -67,6 +68,8 @@ class Foodlist {
 				$newrow['det_afternoon'] = ''; if ($row['det_afternoon'] != NULL) $newrow['det_afternoon'] = $row['det_afternoon'];
 				$newrow['det_evening'] = ''; if ($row['det_evening'] != NULL) $newrow['det_evening'] = $row['det_evening'];
 				$newrow['uihong_severity'] = 0; if ($row['uihong_severity'] != NULL) $newrow['uihong_severity'] = $row['uihong_severity'];
+				$newrow['got_poop'] = 0; if ($row['got_poop'] != NULL) $newrow['got_poop'] = $row['got_poop'];
+				
 				array_push($list, $newrow);
 			}
 			if (count($list) <= 0) {
@@ -76,6 +79,7 @@ class Foodlist {
 				$newrow['det_afternoon'] = '';
 				$newrow['det_evening'] = '';
 				$newrow['uihong_severity'] = 0;
+				$newrow['got_poop'] = 0;
 
 				array_push($list, $newrow);
 			}
