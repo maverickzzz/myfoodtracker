@@ -13,3 +13,6 @@ h1 {text-align: center; margin: 1rem auto;}
 .bg-morning {background-color: #db3236; border-color: #db3236;}
 .bg-afternoon {background-color: #f4c20d; border-color: #f4c20d;}
 .bg-evening {background-color: #3cba54; border-color: #3cba54;}
+
+.form-group ul {list-style: none; padding-left: 0;}
+.form-group ul li {display: inline-block; min-width: 150px; margin-bottom: 10px;}

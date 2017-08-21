@@ -8,7 +8,7 @@ class Foodlist {
 		$year = $_REQUEST['periodyear'];
 
 		$dbh = new Db();
-		$query = "select DAY(history_date) as day, det_morning, det_afternoon, det_evening, uihong_severity from track_date where MONTH(history_date) = ? and YEAR(history_date) = ?";
+		$query = "select DAY(history_date) as day, det_morning, det_afternoon, det_evening, uihong_severity, got_poop from track_date where MONTH(history_date) = ? and YEAR(history_date) = ?";
 
 		$stmt = $dbh->prepare($query);
 		$stmt->execute(array($month, $year));
@@ -44,9 +44,7 @@ class Foodlist {
 			if ($stmt->rowCount() > 0) {
 				$query = "update track_date set det_morning = ?, det_afternoon = ?, det_evening = ?, uihong_severity = ?, got_poop = ? where history_date = ?";
 				$stmt = $dbh->prepare($query);
-				var_dump($stmt);
 				$stmt->execute(array($data_morning, $data_afternoon, $data_evening, $uihong_severity, $got_poop, $history_date));
-				var_dump($stmt);
 			} else {
 				$query = "insert into track_date values(?, ?, ?, ?, ?, ?)";
 				$stmt = $dbh->prepare($query);
@@ -69,7 +67,7 @@ class Foodlist {
 				$newrow['det_evening'] = ''; if ($row['det_evening'] != NULL) $newrow['det_evening'] = $row['det_evening'];
 				$newrow['uihong_severity'] = 0; if ($row['uihong_severity'] != NULL) $newrow['uihong_severity'] = $row['uihong_severity'];
 				$newrow['got_poop'] = 0; if ($row['got_poop'] != NULL) $newrow['got_poop'] = $row['got_poop'];
-				
+
 				array_push($list, $newrow);
 			}
 			if (count($list) <= 0) {
