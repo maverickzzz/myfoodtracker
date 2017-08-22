@@ -260,20 +260,28 @@ app.controller("myCtrlMain", function($scope, $http, myService) {
 app.controller("myCtrlDetail", function($scope, $http, $routeParams, myService, $location) {
     var dataCollection = [];
 
-    // $scope.category = [{"value" : "morning", "label" : "Morning"}, {"value" : "afternoon", "label" : "Afternoon"}, { "value" : "evening", "label" : "Evening"}];
-    // console.log($scope.category);
+    $scope.categories = [{
+        id: 'morning',
+        desc: 'Morning'
+        }, {
+        id: 'afternoon',
+        desc: 'Afternoon'
+        }, {
+        id: 'evening',
+        desc: 'Evening'
+    }];
 
-    // var date = new Date();
-    // var hour = date.getHours();
+    var date = new Date();
+    var hour = date.getHours();
 
-    // $scope.category = 'morning';
-    // if (hour < 12) {
-    //     $scope.category = 'morning';
-    // } else if (hour < 4) {
-    //     $scope.category = 'afternoon';
-    // } else {
-    //     $scope.category = 'evening';
-    // }
+    $scope.category = 'morning';
+    if (hour < 12) {
+        $scope.category = 'morning';
+    } else if (hour < 16) {
+        $scope.category = 'afternoon';
+    } else {
+        $scope.category = 'evening';
+    }
 
     $http({
         method: 'POST',
