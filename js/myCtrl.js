@@ -51,83 +51,7 @@ app.service("myService", function() {
 });
 
 app.controller("myCtrlMain", function($scope, $http, myService) {
-    // $scope.rows = [
-    //     {
-    //         "columns" : [
-    //             {"day" : "", "clsMorning" : "", "clsAfternoon" : "", "clsEvening" : ""},
-    //             {"day" : "1", "clsMorning" : "bull-morning", "clsAfternoon" : "bull-afternoon", "clsEvening" : "bull-evening"},
-    //             {"day" : "2", "clsMorning" : "bull-morning", "clsAfternoon" : "bull-afternoon", "clsEvening" : "bull-evening"},
-    //             {"day" : "3", "clsMorning" : "bull-morning", "clsAfternoon" : "bull-afternoon", "clsEvening" : "bull-evening"},
-    //             {"day" : "4", "clsMorning" : "bull-morning", "clsAfternoon" : "bull-afternoon", "clsEvening" : "bull-evening"},
-    //             {"day" : "5", "clsMorning" : "bull-morning", "clsAfternoon" : "bull-afternoon", "clsEvening" : "bull-evening"},
-    //             {"day" : "6", "clsMorning" : "bull-morning", "clsAfternoon" : "bull-afternoon", "clsEvening" : "bull-evening"}
-    //         ]
-    //     },
-    //     {
-    //         "columns" : [
-    //             {"day" : "7", "clsMorning" : "bull-morning", "clsAfternoon" : "bull-afternoon", "clsEvening" : "bull-evening"},
-    //             {"day" : "8", "clsMorning" : "bull-morning", "clsAfternoon" : "bull-afternoon", "clsEvening" : "bull-evening"},
-    //             {"day" : "9", "clsMorning" : "bull-morning", "clsAfternoon" : "bull-afternoon", "clsEvening" : "bull-evening"},
-    //             {"day" : "10", "clsMorning" : "bull-morning", "clsAfternoon" : "bull-afternoon", "clsEvening" : "bull-evening"},
-    //             {"day" : "11", "clsMorning" : "bull-morning", "clsAfternoon" : "bull-afternoon", "clsEvening" : "bull-evening"},
-    //             {"day" : "12", "clsMorning" : "bull-morning", "clsAfternoon" : "bull-afternoon", "clsEvening" : "bull-evening"},
-    //             {"day" : "13", "clsMorning" : "bull-morning", "clsAfternoon" : "bull-afternoon", "clsEvening" : "bull-evening"}
-    //         ]
-    //     },
-    //     {
-    //         "columns" : [
-    //             {"day" : "14", "clsMorning" : "bull-morning", "clsAfternoon" : "bull-afternoon", "clsEvening" : "bull-evening"},
-    //             {"day" : "15", "clsMorning" : "bull-morning", "clsAfternoon" : "bull-afternoon", "clsEvening" : "bull-evening"},
-    //             {"day" : "16", "clsMorning" : "bull-morning", "clsAfternoon" : "bull-afternoon", "clsEvening" : "bull-evening"},
-    //             {"day" : "17", "clsMorning" : "bull-morning", "clsAfternoon" : "bull-afternoon", "clsEvening" : "bull-evening"},
-    //             {"day" : "18", "clsMorning" : "bull-morning", "clsAfternoon" : "bull-afternoon", "clsEvening" : "bull-evening"},
-    //             {"day" : "19", "clsMorning" : "bull-morning", "clsAfternoon" : "bull-afternoon", "clsEvening" : "bull-evening"},
-    //             {"day" : "20", "clsMorning" : "bull-morning", "clsAfternoon" : "bull-afternoon", "clsEvening" : "bull-evening"}
-    //         ]
-    //     },
-    //     {
-    //         "columns" : [
-    //             {"day" : "21", "clsMorning" : "bull-morning", "clsAfternoon" : "bull-afternoon", "clsEvening" : "bull-evening"},
-    //             {"day" : "22", "clsMorning" : "bull-morning", "clsAfternoon" : "bull-afternoon", "clsEvening" : "bull-evening"},
-    //             {"day" : "23", "clsMorning" : "bull-morning", "clsAfternoon" : "bull-afternoon", "clsEvening" : "bull-evening"},
-    //             {"day" : "24", "clsMorning" : "bull-morning", "clsAfternoon" : "bull-afternoon", "clsEvening" : "bull-evening"},
-    //             {"day" : "25", "clsMorning" : "bull-morning", "clsAfternoon" : "bull-afternoon", "clsEvening" : "bull-evening"},
-    //             {"day" : "26", "clsMorning" : "bull-morning", "clsAfternoon" : "bull-afternoon", "clsEvening" : "bull-evening"},
-    //             {"day" : "27", "clsMorning" : "bull-morning", "clsAfternoon" : "bull-afternoon", "clsEvening" : "bull-evening"}
-    //         ]
-    //     },
-    //     {
-    //         "columns" : [
-    //             {"day" : "28", "clsMorning" : "bull-morning", "clsAfternoon" : "bull-afternoon", "clsEvening" : "bull-evening"},
-    //             {"day" : "29", "clsMorning" : "bull-morning", "clsAfternoon" : "bull-afternoon", "clsEvening" : "bull-evening"},
-    //             {"day" : "30", "clsMorning" : "bull-morning", "clsAfternoon" : "bull-afternoon", "clsEvening" : "bull-evening"},
-    //             {"day" : "31", "clsMorning" : "bull-morning", "clsAfternoon" : "bull-afternoon", "clsEvening" : "bull-evening"},
-    //             {"day" : "", "clsMorning" : "", "clsAfternoon" : "", "clsEvening" : ""},
-    //             {"day" : "", "clsMorning" : "", "clsAfternoon" : "", "clsEvening" : ""},
-    //             {"day" : "", "clsMorning" : "", "clsAfternoon" : "", "clsEvening" : ""}
-    //         ]
-    //     },
-    // ];
-
-    // $scope.months = [
-    //     {"monthNo" : 1, "monthName" : "January"},
-    //     {"monthNo" : 2, "monthName" : "February"},
-    //     {"monthNo" : 3, "monthName" : "March"},
-    //     {"monthNo" : 4, "monthName" : "April"},
-    //     {"monthNo" : 5, "monthName" : "May"},
-    //     {"monthNo" : 6, "monthName" : "June"},
-    //     {"monthNo" : 7, "monthName" : "July"},
-    //     {"monthNo" : 8, "monthName" : "August"},
-    //     {"monthNo" : 9, "monthName" : "September"},
-    //     {"monthNo" : 10, "monthName" : "October"},
-    //     {"monthNo" : 11, "monthName" : "November"},
-    //     {"monthNo" : 12, "monthName" : "December"},
-    // ];
-
-    // $scope.getMonthName = function(month) {
-    //     return $scope.months[month - 1].monthName;
-    // }
-
+    
     $scope.generateCalendar = function(month, year) {
         var dateBegin = new Date();
         dateBegin.setFullYear(year, month - 1, 1);
@@ -208,8 +132,6 @@ app.controller("myCtrlMain", function($scope, $http, myService) {
         }).then(function(obj) {
             dataCollection = obj.data;
 
-            // console.log(dataCollection);
-
             for (weekCounter = 0; weekCounter < $scope.rows.length; weekCounter++) {
                 for (dayCounter = 0; dayCounter < $scope.rows[weekCounter].columns.length; dayCounter++) {
                     var dataCounter = 0;
@@ -241,20 +163,11 @@ app.controller("myCtrlMain", function($scope, $http, myService) {
         $scope.currentYear = myService.getYear();
         $scope.generateCalendar(myService.getMonth(), myService.getYear());
     }
-    
-    // var date = new Date();
-    // $scope.currentMonth = date.getMonth() + 1;
-    // $scope.currentYear = date.getFullYear();
-
-    // $scope.currentMonthName = $scope.getMonthName($scope.currentMonth);
-    // $scope.generateCalendar($scope.currentMonth, $scope.currentYear);
 
     $scope.currentMonthName = myService.getMonthName();
     $scope.currentYear = myService.getYear();
     $scope.generateCalendar(myService.getMonth(), myService.getYear());
 
-    // console.log(myService.getMonthName());
-    // console.log($scope.currentMonthName());
 });
 
 app.controller("myCtrlDetail", function($scope, $http, $routeParams, myService, $location) {
