@@ -211,7 +211,7 @@ app.controller("myCtrlDetail", function($scope, $http, $routeParams, myService, 
         $scope.det_morning = (dataCollection[0].det_morning == '' ? '' : JSON.parse(dataCollection[0].det_morning));
         $scope.det_afternoon = (dataCollection[0].det_afternoon == '' ? '' : JSON.parse(dataCollection[0].det_afternoon));
         $scope.det_evening = (dataCollection[0].det_evening == '' ? '' : JSON.parse(dataCollection[0].det_evening));
-        $scope.uihong_severity = dataCollection[0].uihong_severity;
+        $scope.uihong_severity_morning = dataCollection[0].uihong_severity_morning;
         $scope.got_poop = dataCollection[0].got_poop;
     });
 
@@ -255,7 +255,7 @@ app.controller("myCtrlDetail", function($scope, $http, $routeParams, myService, 
                 'afternoon': ($scope.det_afternoon.length > 0 ? angular.toJson($scope.det_afternoon) : ''),
                 'evening' : ($scope.det_evening.length > 0 ? angular.toJson($scope.det_evening) : ''),
                 'historydate' : $scope.historydate,
-                'uihong_severity' : $scope.uihong_severity,
+                'uihong_severity_morning' : $scope.uihong_severity_morning,
                 'got_poop' : $scope.got_poop
             }
         }).then(function(obj) {
