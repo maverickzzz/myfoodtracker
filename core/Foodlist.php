@@ -8,7 +8,7 @@ class Foodlist {
 		$year = $_REQUEST['periodyear'];
 
 		$dbh = new Db();
-		$query = "select DAY(history_date) as day, det_morning, det_afternoon, det_evening, uihong_severity_morning, got_poop from track_date where MONTH(history_date) = ? and YEAR(history_date) = ?";
+		$query = "select DAY(history_date) as day, det_morning, det_afternoon, det_evening, uihong_severity_morning, uihong_severity_afternoon, uihong_severity_evening, got_poop from track_date where MONTH(history_date) = ? and YEAR(history_date) = ?";
 
 		$stmt = $dbh->prepare($query);
 		$stmt->execute(array($month, $year));
@@ -19,7 +19,9 @@ class Foodlist {
 			$newrow['clsMorning'] = ''; if ($row['det_morning'] != '' && $row['det_morning'] != NULL) $newrow['clsMorning'] = 'bull-morning';
 			$newrow['clsAfternoon'] = ''; if ($row['det_afternoon'] != '' && $row['det_afternoon'] != NULL) $newrow['clsAfternoon'] = 'bull-afternoon';
 			$newrow['clsEvening'] = ''; if ($row['det_evening'] != '' && $row['det_evening'] != NULL) $newrow['clsEvening'] = 'bull-evening';
-			$newrow['clsUihongSeverity'] = 0; if ($row['uihong_severity_morning'] != '' && $row['uihong_severity_morning'] != NULL) $newrow['clsUihongSeverity'] = 'bull-uihong-severity-' . $row['uihong_severity_morning'];
+			$newrow['clsUihongSeverityMorning'] = 0; if ($row['uihong_severity_morning'] != '' && $row['uihong_severity_morning'] != NULL) $newrow['clsUihongSeverityMorning'] = 'bull-uihong-severity-' . $row['uihong_severity_morning'];
+			$newrow['clsUihongSeverityAfternoon'] = 0; if ($row['uihong_severity_afternoon'] != '' && $row['uihong_severity_afternoon'] != NULL) $newrow['clsUihongSeverityAfternoon'] = 'bull-uihong-severity-' . $row['uihong_severity_afternoon'];
+			$newrow['clsUihongSeverityEvening'] = 0; if ($row['uihong_severity_evening'] != '' && $row['uihong_severity_evening'] != NULL) $newrow['clsUihongSeverityEvening'] = 'bull-uihong-severity-' . $row['uihong_severity_evening'];
 			$newrow['clsGotPoop'] = 0; if ($row['got_poop'] == 1) $newrow['clsGotPoop'] = 'bull-got-poop';
 			array_push($list, $newrow);
 		}
@@ -37,6 +39,8 @@ class Foodlist {
 			$data_evening = $_REQUEST['evening'];
 			$history_date = date('Y-m-d', strtotime($_REQUEST['historydate']));
 			$uihong_severity_morning = intval($_REQUEST['uihong_severity_morning']);
+			$uihong_severity_afternoon = intval($_REQUEST['uihong_severity_afternoon']);
+			$uihong_severity_evening = intval($_REQUEST['uihong_severity_evening']);
 			$got_poop = intval($_REQUEST['got_poop']);
 
 			$query = "select * from track_date where history_date = ?";
@@ -44,13 +48,13 @@ class Foodlist {
 			$stmt->execute(array($history_date));
 
 			if ($stmt->rowCount() > 0) {
-				$query = "update track_date set det_morning = ?, det_afternoon = ?, det_evening = ?, uihong_severity_morning = ?, got_poop = ? where history_date = ?";
+				$query = "update track_date set det_morning = ?, det_afternoon = ?, det_evening = ?, uihong_severity_morning = ?, uihong_severity_afternoon = ?, uihong_severity_evening = ?, got_poop = ? where history_date = ?";
 				$stmt = $dbh->prepare($query);
-				$stmt->execute(array($data_morning, $data_afternoon, $data_evening, $uihong_severity_morning, $got_poop, $history_date));
+				$stmt->execute(array($data_morning, $data_afternoon, $data_evening, $uihong_severity_morning, $uihong_severity_afternoon, $uihong_severity_evening, $got_poop, $history_date));
 			} else {
-				$query = "insert into track_date values(?, ?, ?, ?, ?, ?)";
+				$query = "insert into track_date values(?, ?, ?, ?, ?, ?, ?, ?)";
 				$stmt = $dbh->prepare($query);
-				$stmt->execute(array($history_date, $data_morning, $data_afternoon, $data_evening, $uihong_severity_morning, $got_poop));
+				$stmt->execute(array($history_date, $data_morning, $data_afternoon, $data_evening, $uihong_severity_morning, $uihong_severity_afternoon, $uihong_severity_evening, $got_poop));
 			}
 		
 		} else {
@@ -68,6 +72,8 @@ class Foodlist {
 				$newrow['det_afternoon'] = ''; if ($row['det_afternoon'] != NULL) $newrow['det_afternoon'] = $row['det_afternoon'];
 				$newrow['det_evening'] = ''; if ($row['det_evening'] != NULL) $newrow['det_evening'] = $row['det_evening'];
 				$newrow['uihong_severity_morning'] = 0; if ($row['uihong_severity_morning'] != NULL) $newrow['uihong_severity_morning'] = $row['uihong_severity_morning'];
+				$newrow['uihong_severity_afternoon'] = 0; if ($row['uihong_severity_afternoon'] != NULL) $newrow['uihong_severity_afternoon'] = $row['uihong_severity_afternoon'];
+				$newrow['uihong_severity_evening'] = 0; if ($row['uihong_severity_evening'] != NULL) $newrow['uihong_severity_evening'] = $row['uihong_severity_evening'];
 				$newrow['got_poop'] = 0; if ($row['got_poop'] != NULL) $newrow['got_poop'] = $row['got_poop'];
 
 				array_push($list, $newrow);
@@ -79,6 +85,8 @@ class Foodlist {
 				$newrow['det_afternoon'] = '';
 				$newrow['det_evening'] = '';
 				$newrow['uihong_severity_morning'] = 0;
+				$newrow['uihong_severity_afternoon'] = 0;
+				$newrow['uihong_severity_evening'] = 0;
 				$newrow['got_poop'] = 0;
 
 				array_push($list, $newrow);

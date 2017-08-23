@@ -132,6 +132,8 @@ app.controller("myCtrlMain", function($scope, $http, myService) {
         }).then(function(obj) {
             dataCollection = obj.data;
 
+            console.log(dataCollection);
+
             for (weekCounter = 0; weekCounter < $scope.rows.length; weekCounter++) {
                 for (dayCounter = 0; dayCounter < $scope.rows[weekCounter].columns.length; dayCounter++) {
                     var dataCounter = 0;
@@ -140,13 +142,17 @@ app.controller("myCtrlMain", function($scope, $http, myService) {
                             $scope.rows[weekCounter].columns[dayCounter].clsMorning = dataCollection[dataCounter].clsMorning;
                             $scope.rows[weekCounter].columns[dayCounter].clsAfternoon = dataCollection[dataCounter].clsAfternoon;
                             $scope.rows[weekCounter].columns[dayCounter].clsEvening = dataCollection[dataCounter].clsEvening;
-                            $scope.rows[weekCounter].columns[dayCounter].clsUihongSeverity = dataCollection[dataCounter].clsUihongSeverity;
+                            $scope.rows[weekCounter].columns[dayCounter].clsUihongSeverityMorning = dataCollection[dataCounter].clsUihongSeverityMorning;
+                            $scope.rows[weekCounter].columns[dayCounter].clsUihongSeverityAfternoon = dataCollection[dataCounter].clsUihongSeverityAfternoon;
+                            $scope.rows[weekCounter].columns[dayCounter].clsUihongSeverityEvening = dataCollection[dataCounter].clsUihongSeverityEvening;
                             $scope.rows[weekCounter].columns[dayCounter].clsGotPoop = dataCollection[dataCounter].clsGotPoop;
                             break;                 
                         }
                     }
                 }
             }
+
+            console.log($scope.rows);
         });
     }
 
@@ -212,6 +218,8 @@ app.controller("myCtrlDetail", function($scope, $http, $routeParams, myService, 
         $scope.det_afternoon = (dataCollection[0].det_afternoon == '' ? '' : JSON.parse(dataCollection[0].det_afternoon));
         $scope.det_evening = (dataCollection[0].det_evening == '' ? '' : JSON.parse(dataCollection[0].det_evening));
         $scope.uihong_severity_morning = dataCollection[0].uihong_severity_morning;
+        $scope.uihong_severity_afternoon = dataCollection[0].uihong_severity_afternoon;
+        $scope.uihong_severity_evening = dataCollection[0].uihong_severity_evening;
         $scope.got_poop = dataCollection[0].got_poop;
     });
 
@@ -256,6 +264,8 @@ app.controller("myCtrlDetail", function($scope, $http, $routeParams, myService, 
                 'evening' : ($scope.det_evening.length > 0 ? angular.toJson($scope.det_evening) : ''),
                 'historydate' : $scope.historydate,
                 'uihong_severity_morning' : $scope.uihong_severity_morning,
+                'uihong_severity_afternoon' : $scope.uihong_severity_afternoon,
+                'uihong_severity_evening' : $scope.uihong_severity_evening,
                 'got_poop' : $scope.got_poop
             }
         }).then(function(obj) {
