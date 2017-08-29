@@ -1,3 +1,5 @@
+body {position: relative;}
+
 h1 {text-align: center; margin: 1rem auto;}
 .month-selector {margin-bottom: 0;}
 .month-selector-arrow {padding-top: 0.3rem; display: block;}
@@ -32,7 +34,7 @@ h1 {text-align: center; margin: 1rem auto;}
     display: block !important;
     position: absolute;
     background-image: url('../img/Eclipse.gif');
-    z-index: 1000;
+    z-index: 100;
     background-position: center;
     background-size: 50% auto, cover;
     background-attachment: fixed, fixed;
