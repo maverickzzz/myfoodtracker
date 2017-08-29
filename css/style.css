@@ -25,3 +25,23 @@ h1 {text-align: center; margin: 1rem auto;}
 
 .form-group ul {list-style: none; padding-left: 0;}
 .form-group ul li {display: inline-block; min-width: 150px; margin-bottom: 10px;}
+
+.loading {
+	width: 100%;
+    height: 100%;
+    display: block !important;
+    position: absolute;
+    background-image: url('../img/Eclipse.gif');
+    z-index: 100;
+    background-position: center;
+    background-size: 50% auto, cover;
+    background-attachment: fixed, fixed;
+    background-repeat: no-repeat, no-repeat;
+    background-color: white;
+    opacity: 1;
+}
+
+.ng-hide {
+	transition: all linear 0.5s;
+	opacity: 0;
+}

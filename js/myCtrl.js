@@ -50,7 +50,9 @@ app.service("myService", function() {
     }
 });
 
-app.controller("myCtrlMain", function($scope, $http, myService) {
+app.controller("myCtrlMain", function($scope, $http, myService, $rootScope) {
+
+    $rootScope.loading = true;
     
     $scope.generateCalendar = function(month, year) {
         var dateBegin = new Date();
@@ -132,7 +134,7 @@ app.controller("myCtrlMain", function($scope, $http, myService) {
         }).then(function(obj) {
             dataCollection = obj.data;
 
-            console.log(dataCollection);
+            // console.log(dataCollection);
 
             for (weekCounter = 0; weekCounter < $scope.rows.length; weekCounter++) {
                 for (dayCounter = 0; dayCounter < $scope.rows[weekCounter].columns.length; dayCounter++) {
@@ -152,7 +154,9 @@ app.controller("myCtrlMain", function($scope, $http, myService) {
                 }
             }
 
-            console.log($scope.rows);
+            // console.log($scope.rows);
+
+            $rootScope.loading = false;
         });
     }
 
@@ -176,7 +180,9 @@ app.controller("myCtrlMain", function($scope, $http, myService) {
 
 });
 
-app.controller("myCtrlDetail", function($scope, $http, $routeParams, myService, $location) {
+app.controller("myCtrlDetail", function($scope, $http, $routeParams, myService, $location, $rootScope) {
+    $rootScope.loading = true;
+
     var dataCollection = [];
 
     $scope.categories = [{
@@ -221,6 +227,8 @@ app.controller("myCtrlDetail", function($scope, $http, $routeParams, myService, 
         $scope.uihong_severity_afternoon = dataCollection[0].uihong_severity_afternoon;
         $scope.uihong_severity_evening = dataCollection[0].uihong_severity_evening;
         $scope.got_poop = dataCollection[0].got_poop;
+
+        $rootScope.loading = false;
     });
 
     $scope.addFood = function(){
