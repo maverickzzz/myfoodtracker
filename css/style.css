@@ -32,7 +32,7 @@ h1 {text-align: center; margin: 1rem auto;}
     display: block !important;
     position: absolute;
     background-image: url('../img/Eclipse.gif');
-    z-index: 100;
+    z-index: 1000;
     background-position: center;
     background-size: 50% auto, cover;
     background-attachment: fixed, fixed;
