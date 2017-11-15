@@ -53,6 +53,23 @@ app.service("myService", function() {
 app.controller("myCtrlMain", function($scope, $http, myService, $rootScope) {
 
     $rootScope.loading = true;
+
+    $scope.modeDiary = true;
+    $scope.modeBleed = false;
+    
+    $scope.setMode = function(mode) {
+        if (mode == 'bleed') {
+            $scope.modeDiary = false;
+            $scope.modeBleed = true;
+            $rootScope.currentMode = 'bleed';
+            $rootScope.currentTitle = 'Bleed Mode';
+        } else if (mode == 'diary') {
+            $scope.modeDiary = true;
+            $scope.modeBleed = false;
+            $rootScope.currentMode = 'diary';
+            $rootScope.currentTitle = 'Diary';
+        }
+    }
     
     $scope.generateCalendar = function(month, year) {
         var dateBegin = new Date();
@@ -148,6 +165,7 @@ app.controller("myCtrlMain", function($scope, $http, myService, $rootScope) {
                             $scope.rows[weekCounter].columns[dayCounter].clsUihongSeverityAfternoon = dataCollection[dataCounter].clsUihongSeverityAfternoon;
                             $scope.rows[weekCounter].columns[dayCounter].clsUihongSeverityEvening = dataCollection[dataCounter].clsUihongSeverityEvening;
                             $scope.rows[weekCounter].columns[dayCounter].clsGotPoop = dataCollection[dataCounter].clsGotPoop;
+                            $scope.rows[weekCounter].columns[dayCounter].clsGotBleed = dataCollection[dataCounter].clsGotBleed;
                             break;                 
                         }
                     }
@@ -177,6 +195,13 @@ app.controller("myCtrlMain", function($scope, $http, myService, $rootScope) {
     $scope.currentMonthName = myService.getMonthName();
     $scope.currentYear = myService.getYear();
     $scope.generateCalendar(myService.getMonth(), myService.getYear());
+
+    if ($rootScope.currentMode == null) {
+        $rootScope.currentMode = 'diary';
+        $rootScope.currentTitle = 'Diary';
+    } else {
+        $scope.setMode($rootScope.currentMode);
+    }
 
 });
 
@@ -227,6 +252,7 @@ app.controller("myCtrlDetail", function($scope, $http, $routeParams, myService, 
         $scope.uihong_severity_afternoon = dataCollection[0].uihong_severity_afternoon;
         $scope.uihong_severity_evening = dataCollection[0].uihong_severity_evening;
         $scope.got_poop = dataCollection[0].got_poop;
+        $scope.got_bleed = dataCollection[0].got_bleed;
 
         $rootScope.loading = false;
     });
@@ -274,7 +300,8 @@ app.controller("myCtrlDetail", function($scope, $http, $routeParams, myService, 
                 'uihong_severity_morning' : $scope.uihong_severity_morning,
                 'uihong_severity_afternoon' : $scope.uihong_severity_afternoon,
                 'uihong_severity_evening' : $scope.uihong_severity_evening,
-                'got_poop' : $scope.got_poop
+                'got_poop' : $scope.got_poop,
+                'got_bleed' : $scope.got_bleed
             }
         }).then(function(obj) {
             $location.path("/");

@@ -8,7 +8,7 @@ class Foodlist {
 		$year = $_REQUEST['periodyear'];
 
 		$dbh = new Db();
-		$query = "select DAY(history_date) as day, det_morning, det_afternoon, det_evening, uihong_severity_morning, uihong_severity_afternoon, uihong_severity_evening, got_poop from track_date where MONTH(history_date) = ? and YEAR(history_date) = ?";
+		$query = "select DAY(history_date) as day, det_morning, det_afternoon, det_evening, uihong_severity_morning, uihong_severity_afternoon, uihong_severity_evening, got_poop, got_bleed from track_date where MONTH(history_date) = ? and YEAR(history_date) = ?";
 
 		$stmt = $dbh->prepare($query);
 		$stmt->execute(array($month, $year));
@@ -23,6 +23,7 @@ class Foodlist {
 			$newrow['clsUihongSeverityAfternoon'] = 0; if ($row['uihong_severity_afternoon'] != '' && $row['uihong_severity_afternoon'] != NULL) $newrow['clsUihongSeverityAfternoon'] = 'bull-uihong-severity-' . $row['uihong_severity_afternoon'];
 			$newrow['clsUihongSeverityEvening'] = 0; if ($row['uihong_severity_evening'] != '' && $row['uihong_severity_evening'] != NULL) $newrow['clsUihongSeverityEvening'] = 'bull-uihong-severity-' . $row['uihong_severity_evening'];
 			$newrow['clsGotPoop'] = 0; if ($row['got_poop'] == 1) $newrow['clsGotPoop'] = 'bull-got-poop';
+			$newrow['clsGotBleed'] = 0; if ($row['got_bleed'] == 0) $newrow['clsGotBleed'] = 'bull-got-bleed-0'; if ($row['got_bleed'] == 1) $newrow['clsGotBleed'] = 'bull-got-bleed-1'; if ($row['got_bleed'] == 2) $newrow['clsGotBleed'] = 'bull-got-bleed-2';
 			array_push($list, $newrow);
 		}
 
@@ -42,19 +43,20 @@ class Foodlist {
 			$uihong_severity_afternoon = intval($_REQUEST['uihong_severity_afternoon']);
 			$uihong_severity_evening = intval($_REQUEST['uihong_severity_evening']);
 			$got_poop = intval($_REQUEST['got_poop']);
+			$got_bleed = intval($_REQUEST['got_bleed']);
 
 			$query = "select * from track_date where history_date = ?";
 			$stmt = $dbh->prepare($query);
 			$stmt->execute(array($history_date));
 
 			if ($stmt->rowCount() > 0) {
-				$query = "update track_date set det_morning = ?, det_afternoon = ?, det_evening = ?, uihong_severity_morning = ?, uihong_severity_afternoon = ?, uihong_severity_evening = ?, got_poop = ? where history_date = ?";
+				$query = "update track_date set det_morning = ?, det_afternoon = ?, det_evening = ?, uihong_severity_morning = ?, uihong_severity_afternoon = ?, uihong_severity_evening = ?, got_poop = ?, got_bleed = ? where history_date = ?";
 				$stmt = $dbh->prepare($query);
-				$stmt->execute(array($data_morning, $data_afternoon, $data_evening, $uihong_severity_morning, $uihong_severity_afternoon, $uihong_severity_evening, $got_poop, $history_date));
+				$stmt->execute(array($data_morning, $data_afternoon, $data_evening, $uihong_severity_morning, $uihong_severity_afternoon, $uihong_severity_evening, $got_poop, $got_bleed, $history_date));
 			} else {
-				$query = "insert into track_date values(?, ?, ?, ?, ?, ?, ?, ?)";
+				$query = "insert into track_date values(?, ?, ?, ?, ?, ?, ?, ?, ?)";
 				$stmt = $dbh->prepare($query);
-				$stmt->execute(array($history_date, $data_morning, $data_afternoon, $data_evening, $uihong_severity_morning, $uihong_severity_afternoon, $uihong_severity_evening, $got_poop));
+				$stmt->execute(array($history_date, $data_morning, $data_afternoon, $data_evening, $uihong_severity_morning, $uihong_severity_afternoon, $uihong_severity_evening, $got_poop, $got_bleed));
 			}
 		
 		} else {
@@ -75,6 +77,7 @@ class Foodlist {
 				$newrow['uihong_severity_afternoon'] = 0; if ($row['uihong_severity_afternoon'] != NULL) $newrow['uihong_severity_afternoon'] = $row['uihong_severity_afternoon'];
 				$newrow['uihong_severity_evening'] = 0; if ($row['uihong_severity_evening'] != NULL) $newrow['uihong_severity_evening'] = $row['uihong_severity_evening'];
 				$newrow['got_poop'] = 0; if ($row['got_poop'] != NULL) $newrow['got_poop'] = $row['got_poop'];
+				$newrow['got_bleed'] = 0; if ($row['got_bleed'] != NULL) $newrow['got_bleed'] = $row['got_bleed'];
 
 				array_push($list, $newrow);
 			}
@@ -88,6 +91,7 @@ class Foodlist {
 				$newrow['uihong_severity_afternoon'] = 0;
 				$newrow['uihong_severity_evening'] = 0;
 				$newrow['got_poop'] = 0;
+				$newrow['got_bleed'] = 0;
 
 				array_push($list, $newrow);
 			}

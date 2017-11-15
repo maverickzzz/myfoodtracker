@@ -22,6 +22,10 @@ h1 {text-align: center; padding: 1rem;}
 
 .bull-got-poop {color: #844b1a;}
 
+.bull-got-bleed-2 {color: #db3236;}
+.bull-got-bleed-1 {color: #f4c20d;}
+.bull-got-bleed-0 {color: #fff;}
+
 .bg-morning {background-color: #db3236; border-color: #db3236;}
 .bg-afternoon {background-color: #f4c20d; border-color: #f4c20d;}
 .bg-evening {background-color: #3cba54; border-color: #3cba54;}
