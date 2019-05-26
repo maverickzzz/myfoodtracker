@@ -23,7 +23,7 @@ class Foodlist {
 			$newrow['clsUihongSeverityAfternoon'] = 0; if ($row['uihong_severity_afternoon'] != '' && $row['uihong_severity_afternoon'] != NULL) $newrow['clsUihongSeverityAfternoon'] = 'bull-uihong-severity-' . $row['uihong_severity_afternoon'];
 			$newrow['clsUihongSeverityEvening'] = 0; if ($row['uihong_severity_evening'] != '' && $row['uihong_severity_evening'] != NULL) $newrow['clsUihongSeverityEvening'] = 'bull-uihong-severity-' . $row['uihong_severity_evening'];
 			$newrow['clsGotPoop'] = 0; if ($row['got_poop'] == 1) $newrow['clsGotPoop'] = 'bull-got-poop';
-			$newrow['clsGotBleed'] = 0; if ($row['got_bleed'] == 0) $newrow['clsGotBleed'] = 'bull-got-bleed-0'; if ($row['got_bleed'] == 1) $newrow['clsGotBleed'] = 'bull-got-bleed-1'; if ($row['got_bleed'] == 2) $newrow['clsGotBleed'] = 'bull-got-bleed-2';
+			$newrow['clsGotBleed'] = 0; if ($row['got_bleed'] == 0) $newrow['clsGotBleed'] = 'bull-got-bleed-0'; if ($row['got_bleed'] == 1) $newrow['clsGotBleed'] = 'bull-got-bleed-1'; if ($row['got_bleed'] == 2) $newrow['clsGotBleed'] = 'bull-got-bleed-2'; if ($row['got_bleed'] == 3) $newrow['clsGotBleed'] = 'bull-got-bleed-3';
 			array_push($list, $newrow);
 		}
 

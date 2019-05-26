@@ -15,15 +15,17 @@ h1 {text-align: center; padding: 1rem;}
 .bull-afternoon {color: black;}
 .bull-evening {color: black;}
 
-.bull-uihong-severity-3 {color: #4285f4;}
-.bull-uihong-severity-2 {color: #db3236;}
-.bull-uihong-severity-1 {color: #f4c20d;}
-.bull-uihong-severity-0 {color: #3cba54;}
+.bull-uihong-severity-5 {color: #115AF0;}
+.bull-uihong-severity-4 {color: red;}
+.bull-uihong-severity-3 {color: orange;}
+.bull-uihong-severity-2 {color: #F3DA06;}
+.bull-uihong-severity-1 {color: green;}
 
 .bull-got-poop {color: #844b1a;}
 
-.bull-got-bleed-2 {color: #db3236;}
-.bull-got-bleed-1 {color: #f4c20d;}
+.bull-got-bleed-3 {color: #115AF0;}
+.bull-got-bleed-2 {color: red;}
+.bull-got-bleed-1 {color: #F3DA06;}
 .bull-got-bleed-0 {color: #fff;}
 
 .bg-morning {background-color: #db3236; border-color: #db3236;}
@@ -52,3 +54,34 @@ h1 {text-align: center; padding: 1rem;}
 	transition: all linear 0.5s;
 	opacity: 0;
 }
+
+.input-option { list-style-type: inline; list-style: none; clear: both; padding-left: 0;}
+.input-option li {float: left; width: auto;}
+
+md-switch {margin-top: 0; margin-bottom: 0;}
+md-radio-button {margin-bottom: 0;}
+
+.md-button-0 .md-on {background-color: gray;}
+.md-button-0 .md-off {border-color: gray !important;}
+
+.md-button-1 .md-on {background-color: green;}
+.md-button-1 .md-off {border-color: green !important;}
+
+.md-button-2 .md-on {background-color: #F3DA06;}
+.md-button-2 .md-off {border-color: #F3DA06 !important;}
+
+.md-button-3 .md-on {background-color: orange;}
+.md-button-3 .md-off {border-color: orange !important;}
+
+.md-button-4 .md-on {background-color: red;}
+.md-button-4 .md-off {border-color: red !important;}
+
+.md-button-5 .md-on {background-color: #115AF0;}
+.md-button-5 .md-off {border-color: #115AF0 !important;}
+
+.md-button-0 .md-ink-ripple,
+.md-button-1 .md-ink-ripple,
+.md-button-2 .md-ink-ripple,
+.md-button-3 .md-ink-ripple,
+.md-button-4 .md-ink-ripple,
+.md-button-5 .md-ink-ripple {color: gray !important;}

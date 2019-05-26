@@ -254,6 +254,10 @@ app.controller("myCtrlDetail", function($scope, $http, $routeParams, myService, 
         $scope.got_poop = dataCollection[0].got_poop;
         $scope.got_bleed = dataCollection[0].got_bleed;
 
+        $scope.checkPoopState();
+        console.log($scope.poopState);
+        console.log($scope.got_poop);
+
         $rootScope.loading = false;
     });
 
@@ -321,4 +325,23 @@ app.controller("myCtrlDetail", function($scope, $http, $routeParams, myService, 
     $scope.cancelFood = function(){
         $location.path("/");
     }
+
+    $scope.checkPoopState = function () {
+        if ($scope.got_poop == 1) {
+            $scope.poopState = true;
+        } else {
+            $scope.poopState = false;
+        }
+    }
+
+    $scope.changePoop = function() {
+        if ($scope.poopState) {
+            $scope.got_poop = 1;
+        } else {
+            $scope.got_poop = 0;
+        }
+        console.log($scope.poopState);
+        console.log($scope.got_poop);
+    }
+
 });

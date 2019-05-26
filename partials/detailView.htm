@@ -1,18 +1,26 @@
-			<h1 class="title">Detail View</h1>
-			<div class="form-group row">
-				<label class="col-sm-2 col-form-label">History Date</label>
-				<div class="col">
-					<input type="text" class="form-control" ng-model="historydate" readonly="readonly" />
-				</div>
-			</div>
-			<hr/>
-			<div class="row">
-				<div class="col">
-					<div class="form-check">
-						<label class="col-sm-2 col-form-label">Got Poop?</label>
-					</div>
-					<div class="form-check" ng-init="got_poop='0'">
-					  <label class="form-check-label">
+<h1 class="title">Detail View</h1>
+<div class="form-group row">
+	<label class="col-sm-2 col-form-label">History Date</label>
+	<div class="col">
+		<input type="text" class="form-control" ng-model="historydate" readonly="readonly" />
+	</div>
+</div>
+<hr />
+<div class="row">
+	<div class="col col-sm-3">
+		<div class="form-check">
+			<label>Got Poop?</label>
+		</div>
+	</div>
+	<div class="col">
+		<md-switch class="md-primary" ng-model="poopState" aria-label="Got Poop" ng-change="changePoop()"></md-switch>
+
+		<!-- <ul class="input-option" ng-init="got_poop='0'">
+						<li><label class="col-form-label"><input class="form-check-input" type="radio" ng-model="got_poop" value="0">Sadly no.</label></li>
+						<li><label class="col-form-label"><input class="form-check-input" type="radio" ng-model="got_poop" value="1">Hell yeah!!</label></li>
+					</ul> -->
+		<!-- <div class="form-check">
+					  <label class="form-check-label" ng-init="got_poop='0'">
 					    <input class="form-check-input" type="radio" ng-model="got_poop" value="0">
 					    Sadly no.
 					  </label>
@@ -22,13 +30,33 @@
 					    <input class="form-check-input" type="radio" ng-model="got_poop" value="1">
 					    Hell yeah!!
 					  </label>
-					</div>
-				</div>
-				<div class="col">
-					<div class="form-check">
-						<label class="col-sm-2 col-form-label">You Bleed?</label>
-					</div>
-					<div class="form-check" ng-init="got_bleed='0'">
+					</div> -->
+	</div>
+</div>
+<div class="row">
+	<div class="col col-sm-3">
+		<div class="form-check">
+			<label class="col-form-label">You Bleed?</label>
+		</div>
+	</div>
+	<div class="col">
+		<ul class="input-option">
+			<md-radio-group ng-model="got_bleed">
+				<li><label class="col-form-label">
+						<md-radio-button class="md-button-5" value="3"></md-radio-button>
+					</label></li>
+				<li><label class="col-form-label">
+						<md-radio-button class="md-button-0" value="0"></md-radio-button>
+					</label></li>
+				<li><label class="col-form-label">
+						<md-radio-button class="md-button-2" value="1"></md-radio-button>
+					</label></li>
+				<li><label class="col-form-label">
+						<md-radio-button class="md-button-4" value="2"></md-radio-button>
+					</label></li>
+			</md-radio-group>
+		</ul>
+		<!-- <div class="form-check" ng-init="got_bleed='0'">
 					  <label class="form-check-label">
 					    <input class="form-check-input" type="radio" ng-model="got_bleed" value="0">
 					    Hell no!!
@@ -45,64 +73,135 @@
 					    <input class="form-check-input" type="radio" ng-model="got_bleed" value="2">
 					    Sadly yeah.
 					  </label>
-					</div>
-				</div>
-			</div>
-			<hr/>
-			<div class="form-group row">
-				<label class="col-sm-2 col-form-label">Food</label>
-				<div class="col">
-					<input type="text" class="form-control" name="food" ng-model="food" ng-keyup="$event.keyCode == 13 ? addFood() : null" />
-				</div>
-			</div>
-			<div class="form-group row">
-				<div class="col">
-					<select name="category" class="form-control" ng-model="category" ng-options="category.id as category.desc for category in categories">
-					</select>
-					<!-- <select name="category" class="form-control" ng-model="category" ng-init="category='morning'">
+					</div> -->
+	</div>
+</div>
+<div class="row">
+	<div class="col">
+		<button type="submit" class="btn btn-primary" ng-click="saveFood()">Save</button>
+		<button type="submit" class="btn btn-danger" ng-click="cancelFood()">Cancel</button>
+	</div>
+</div>
+<hr />
+<div class="row">
+	<div class="col">
+		<label class="col-sm-2 col-form-label">Food</label>
+	</div>
+	<div class="col">
+		<input type="text" class="form-control" name="food" ng-model="food"
+			ng-keyup="$event.keyCode == 13 ? addFood() : null" />
+	</div>
+</div>
+<div class="row">
+	<div class="col">&nbsp;</div>
+	<div class="col">
+		<select name="category" class="form-control" ng-model="category"
+			ng-options="category.id as category.desc for category in categories"
+			style="width:75%; float:left;">
+		</select>
+		<!-- <select name="category" class="form-control" ng-model="category" ng-init="category='morning'">
 						<option value="morning" selected>Morning</option>
 						<option value="afternoon">Afternoon</option>
 						<option value="evening">Evening</option>
 					</select> -->
-				</div>
-				<div class="col">
-					<button type="submit" class="btn btn-primary" ng-click="addFood()">Add</button>
-				</div>
-			</div>
-			<div class="form-group">
-				<label><h3>Morning</h3></label>
-				<ul>
-					<li ng-repeat="food in det_morning"><span class="badge badge-danger" ng-click="deleteFood($index, 'morning')">X</span> {{food}}</li>
-				</ul>
-				<div class="form-check row">
-					<label class="col col-form-label"><h5>Got Ui Hong in the Morning?</h5></label>
-				</div>
-				<div class="form-check" ng-init="uihong_severity_morning='0'">
+		<button type="submit" class="btn btn-primary" ng-click="addFood()" style="margin-left: 3px;">+</button>
+	</div>
+</div>
+<div class="row">
+	<div class="col">
+		<label class="col-sm-2 col-form-label">Morning</label>
+		<ul>
+			<li ng-repeat="food in det_morning"><span class="badge badge-danger"
+					ng-click="deleteFood($index, 'morning')">X</span> {{food}}</li>
+		</ul>
+	</div>
+	<div class="col">
+		<ul class="input-option">
+			<md-radio-group ng-model="uihong_severity_morning">
+				<li><label class="col-form-label">
+						<md-radio-button class="md-button-0" value="0"></md-radio-button>
+					</label></li>
+				<li><label class="col-form-label">
+						<md-radio-button class="md-button-1" value="1"></md-radio-button>
+					</label></li>
+				<li><label class="col-form-label">
+						<md-radio-button class="md-button-2" value="2"></md-radio-button>
+					</label></li>
+				<li><label class="col-form-label">
+						<md-radio-button class="md-button-3" value="3"></md-radio-button>
+					</label></li>
+				<li><label class="col-form-label">
+						<md-radio-button class="md-button-4" value="4"></md-radio-button>
+					</label></li>
+			</md-radio-group>
+		</ul>
+	</div>
+</div>
+<!-- <div class="row">
+				<label class="col col-form-label"><h5>Got Ui Hong in the Morning?</h5></label>
+			</div> -->
+<!-- <div class="form-check" ng-init="uihong_severity_morning='0'">
 				  <label class="form-check-label">
 				    <input class="form-check-input" type="radio" ng-model="uihong_severity_morning" value="0">
-				    Everything's okay. My stomach is flat like an airport.
+				    None.
 				  </label>
 				</div>
 				<div class="form-check">
 				  <label class="form-check-label">
 				    <input class="form-check-input" type="radio" ng-model="uihong_severity_morning" value="1">
-				    Slightly, bumping like polisi tidur.
+				    Everything's okay. My stomach is flat like an airport.
 				  </label>
 				</div>
 				<div class="form-check">
 				  <label class="form-check-label">
 				    <input class="form-check-input" type="radio" ng-model="uihong_severity_morning" value="2">
-				    Oh my God! My stomach is going to explode!!
+				    Slightly, bumping like polisi tidur.
 				  </label>
 				</div>
 				<div class="form-check">
 				  <label class="form-check-label">
 				    <input class="form-check-input" type="radio" ng-model="uihong_severity_morning" value="3">
-				    KABOOM!!!
+				    Oh my God! My stomach is going to explode!!
 				  </label>
 				</div>
-				<hr/>
-				<label><h3>Afternoon</h3></label>
+				<div class="form-check">
+				  <label class="form-check-label">
+				    <input class="form-check-input" type="radio" ng-model="uihong_severity_morning" value="4">
+				    KABOOM!!!
+				  </label>
+				</div> -->
+<hr />
+<div class="row">
+	<div class="col">
+		<label class="col-sm-2 col-form-label">Afternoon</label>
+		<ul>
+			<li ng-repeat="food in det_afternoon"><span class="badge badge-danger"
+					ng-click="deleteFood($index, 'afternoon')">X</span> {{food}}</li>
+		</ul>
+	</div>
+	<div class="col">
+		<ul class="input-option">
+			<md-radio-group ng-model="uihong_severity_afternoon">
+				<li><label class="col-form-label">
+						<md-radio-button class="md-button-0" value="0"></md-radio-button>
+					</label></li>
+				<li><label class="col-form-label">
+						<md-radio-button class="md-button-1" value="1"></md-radio-button>
+					</label></li>
+				<li><label class="col-form-label">
+						<md-radio-button class="md-button-2" value="2"></md-radio-button>
+					</label></li>
+				<li><label class="col-form-label">
+						<md-radio-button class="md-button-3" value="3"></md-radio-button>
+					</label></li>
+				<li><label class="col-form-label">
+						<md-radio-button class="md-button-4" value="4"></md-radio-button>
+					</label></li>
+			</md-radio-group>
+		</ul>
+	</div>
+</div>
+<!-- <label class="col-sm-2 col-form-label">Afternoon</label>
 				<ul>
 					<li ng-repeat="food in det_afternoon"><span class="badge badge-danger" ng-click="deleteFood($index, 'afternoon')">X</span> {{food}}</li>
 				</ul>
@@ -112,29 +211,65 @@
 				<div class="form-check" ng-init="uihong_severity_afternoon='0'">
 				  <label class="form-check-label">
 				    <input class="form-check-input" type="radio" ng-model="uihong_severity_afternoon" value="0">
-				    Everything's okay. My stomach is flat like an airport.
+				    None.
 				  </label>
 				</div>
 				<div class="form-check">
 				  <label class="form-check-label">
 				    <input class="form-check-input" type="radio" ng-model="uihong_severity_afternoon" value="1">
-				    Slightly, bumping like polisi tidur.
+				    Everything's okay. My stomach is flat like an airport.
 				  </label>
 				</div>
 				<div class="form-check">
 				  <label class="form-check-label">
 				    <input class="form-check-input" type="radio" ng-model="uihong_severity_afternoon" value="2">
-				    Oh my God! My stomach is going to explode!!
+				    Slightly, bumping like polisi tidur.
 				  </label>
 				</div>
 				<div class="form-check">
 				  <label class="form-check-label">
 				    <input class="form-check-input" type="radio" ng-model="uihong_severity_afternoon" value="3">
-				    KABOOM!!!
+				    Oh my God! My stomach is going to explode!!
 				  </label>
 				</div>
-				<hr/>
-				<label><h3>Evening</h3></label>
+				<div class="form-check">
+				  <label class="form-check-label">
+				    <input class="form-check-input" type="radio" ng-model="uihong_severity_afternoon" value="4">
+				    KABOOM!!!
+				  </label>
+				</div> -->
+<hr />
+<div class="row">
+	<div class="col">
+		<label class="col-sm-2 col-form-label">Evening</label>
+		<ul>
+			<li ng-repeat="food in det_evening"><span class="badge badge-danger"
+					ng-click="deleteFood($index, 'evening')">X</span> {{food}}</li>
+		</ul>
+	</div>
+	<div class="col">
+		<ul class="input-option">
+			<md-radio-group ng-model="uihong_severity_evening">
+				<li><label class="col-form-label">
+						<md-radio-button class="md-button-0" value="0"></md-radio-button>
+					</label></li>
+				<li><label class="col-form-label">
+						<md-radio-button class="md-button-1" value="1"></md-radio-button>
+					</label></li>
+				<li><label class="col-form-label">
+						<md-radio-button class="md-button-2" value="2"></md-radio-button>
+					</label></li>
+				<li><label class="col-form-label">
+						<md-radio-button class="md-button-3" value="3"></md-radio-button>
+					</label></li>
+				<li><label class="col-form-label">
+						<md-radio-button class="md-button-4" value="4"></md-radio-button>
+					</label></li>
+			</md-radio-group>
+		</ul>
+	</div>
+</div>
+<!-- <label class="col-sm-2 col-form-label">Evening</label>
 				<ul>
 					<li ng-repeat="food in det_evening"><span class="badge badge-danger" ng-click="deleteFood($index, 'evening')">X</span> {{food}}</li>
 				</ul>
@@ -144,29 +279,39 @@
 				<div class="form-check" ng-init="uihong_severity_evening='0'">
 				  <label class="form-check-label">
 				    <input class="form-check-input" type="radio" ng-model="uihong_severity_evening" value="0">
-				    Everything's okay. My stomach is flat like an airport.
+				    None.
 				  </label>
 				</div>
 				<div class="form-check">
 				  <label class="form-check-label">
 				    <input class="form-check-input" type="radio" ng-model="uihong_severity_evening" value="1">
-				    Slightly, bumping like polisi tidur.
+				    Everything's okay. My stomach is flat like an airport.
 				  </label>
 				</div>
 				<div class="form-check">
 				  <label class="form-check-label">
 				    <input class="form-check-input" type="radio" ng-model="uihong_severity_evening" value="2">
-				    Oh my God! My stomach is going to explode!!
+				    Slightly, bumping like polisi tidur.
 				  </label>
 				</div>
 				<div class="form-check">
 				  <label class="form-check-label">
 				    <input class="form-check-input" type="radio" ng-model="uihong_severity_evening" value="3">
+				    Oh my God! My stomach is going to explode!!
+				  </label>
+				</div>
+				<div class="form-check">
+				  <label class="form-check-label">
+				    <input class="form-check-input" type="radio" ng-model="uihong_severity_evening" value="4">
 				    KABOOM!!!
 				  </label>
 				</div>
-			</div>
-			<button type="submit" class="btn btn-primary" ng-click="saveFood()">Save</button>
-			<button type="submit" class="btn btn-danger" ng-click="cancelFood()">Cancel</button>
+			</div> -->
+<div class="row">
+	<div class="col">
+		<button type="submit" class="btn btn-primary" ng-click="saveFood()">Save</button>
+		<button type="submit" class="btn btn-danger" ng-click="cancelFood()">Cancel</button>
+	</div>
+</div>
 
-			<div class="row">&nbsp;</div>
+<div class="row">&nbsp;</div>

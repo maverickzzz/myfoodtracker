@@ -1,7 +1,7 @@
 'use strict';
 
 // var app = angular.module("myFoodTracker", ["ngRoute", "ngAnimate"]);
-var app = angular.module("myFoodTracker", ["ngRoute"]);
+var app = angular.module("myFoodTracker", ["ngRoute", "ngMaterial"]);
 var templateFolder = 'partials/';
 
 app.config(function($routeProvider) {
